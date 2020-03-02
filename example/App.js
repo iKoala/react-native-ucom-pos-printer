@@ -15,7 +15,8 @@ import TNRNUcomPosPrinter from 'react-native-ucom-pos-printer';
 export default class App extends Component<{}> {
   state = {
     status: 'starting',
-    message: '--'
+    message: '--',
+    text: '-- no text --'
   };
   componentDidMount() {
     TNRNUcomPosPrinter.sampleMethod('Testing', 123, (message) => {
@@ -24,6 +25,12 @@ export default class App extends Component<{}> {
         message
       });
     });
+    TNRNUcomPosPrinter.show('hihihi RYRY')
+    TNRNUcomPosPrinter.getText((message) => {
+      this.setState({
+        text: message
+      })
+    })
   }
   render() {
     return (
@@ -32,6 +39,8 @@ export default class App extends Component<{}> {
         <Text style={styles.instructions}>STATUS: {this.state.status}</Text>
         <Text style={styles.welcome}>☆NATIVE CALLBACK MESSAGE☆</Text>
         <Text style={styles.instructions}>{this.state.message}</Text>
+        <Text style={styles.welcome}>☆TEXT☆</Text>
+        <Text style={styles.instructions}>{this.state.text}</Text>
       </View>
     );
   }

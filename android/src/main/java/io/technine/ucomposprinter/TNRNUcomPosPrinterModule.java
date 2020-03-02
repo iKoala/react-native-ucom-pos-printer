@@ -31,4 +31,9 @@ public class TNRNUcomPosPrinterModule extends ReactContextBaseJavaModule {
     public void show(String message) {
         Toast.makeText(getReactApplicationContext(), message, Toast.LENGTH_LONG).show();
     }
+
+    @ReactMethod
+    public void getText(Callback callback) {
+        callback.invoke("hihihi 222 from module");
+    }
 }
