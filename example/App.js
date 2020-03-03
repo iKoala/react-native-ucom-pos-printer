@@ -8,8 +8,8 @@
  * https://github.com/facebook/react-native
  */
 
-import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import React, { Component, version } from 'react';
+import { Button, Platform, StyleSheet, Text, View } from 'react-native';
 import TNRNUcomPosPrinter from 'react-native-ucom-pos-printer';
 
 export default class App extends Component<{}> {
@@ -21,26 +21,41 @@ export default class App extends Component<{}> {
   componentDidMount() {
     TNRNUcomPosPrinter.sampleMethod('Testing', 123, (message) => {
       this.setState({
+        moduleVersion: '',
         status: 'native callback received',
         message
       });
     });
     TNRNUcomPosPrinter.show('hihihi RYRY')
-    TNRNUcomPosPrinter.getText((message) => {
+    TNRNUcomPosPrinter.getVersion((versionStr) => {
       this.setState({
-        text: message
+        moduleVersion: versionStr
       })
     })
+    // const printerModel = TNRNUcomPosPrinter.getPrinterManager().getPrinterModel();
+    // this.setState({
+    //   text: printerModel
+    // })
+  }
+  print() {
+    console.log(`print()`)
+    TNRNUcomPosPrinter.print()
   }
   render() {
     return (
       <View style={styles.container}>
+        <Text style={styles.welcome}>Module Version</Text>
+        <Text style={styles.instructions}>{this.state.moduleVersion}</Text>
         <Text style={styles.welcome}>☆TNRNUcomPosPrinter example☆</Text>
         <Text style={styles.instructions}>STATUS: {this.state.status}</Text>
         <Text style={styles.welcome}>☆NATIVE CALLBACK MESSAGE☆</Text>
         <Text style={styles.instructions}>{this.state.message}</Text>
         <Text style={styles.welcome}>☆TEXT☆</Text>
         <Text style={styles.instructions}>{this.state.text}</Text>
+        <Button
+          title="Print"
+          onPress={() => this.print()}
+        />
       </View>
     );
   }

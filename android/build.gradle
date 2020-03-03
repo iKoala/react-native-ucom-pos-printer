@@ -73,6 +73,7 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'  // From node_modules
+    implementation files('libs/UcomPrinterManager-v1.4.7.jar')
 }
 
 def configureReactNativePom(def pom) {

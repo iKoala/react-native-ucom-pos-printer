@@ -1,59 +1,22 @@
 package io.technine.ucomposprinter;
 
 import android.util.Log;
-import android.widget.Toast;
 
-import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.Callback;
 
 import hk.ucom.printer.UcomPrinterManager;
 import hk.ucom.printer.connection.ResultReceiver;
 
 import static hk.ucom.printer.UcomPrinterManager.PrinterModel.PU808USE;
 
-public class TNRNUcomPosPrinterModule extends ReactContextBaseJavaModule implements ResultReceiver {
+public class TNRNUcomPosPrinterManager implements ResultReceiver {
 
-    public static final String VERSION = "1.0.6";
-
-    public static final String TAG = "TNRNPrinterModule";
-
-    private final ReactApplicationContext reactContext;
+    public static final String TAG = "TNRNPrinterManager";
 
     private UcomPrinterManager mPrinterManager;
 
-    public TNRNUcomPosPrinterModule(ReactApplicationContext reactContext) {
-        super(reactContext);
-        this.reactContext = reactContext;
-
-        this.initPrinterManager();
-    }
-
-    @Override
-    public String getName() {
-        return "TNRNUcomPosPrinter";
-    }
-
-    @ReactMethod
-    public void getVersion(Callback callback) {
-        callback.invoke("Version: " + VERSION);
-    }
-
-    @ReactMethod
-    public void sampleMethod(String stringArgument, int numberArgument, Callback callback) {
-        // TODO: Implement some actually useful functionality
-        callback.invoke("Received numberArgument: " + numberArgument + " stringArgument: " + stringArgument);
-    }
-
-    @ReactMethod
-    public void show(String message) {
-        Toast.makeText(getReactApplicationContext(), message, Toast.LENGTH_LONG).show();
-    }
-
-    @ReactMethod
-    public void getText(Callback callback) {
-        callback.invoke("hihihi 222 from module");
+    public TNRNUcomPosPrinterManager() {
+        Log.d(TAG, "TNRNUcomPosPrinterManager constructor");
     }
 
     @Override
@@ -92,9 +55,10 @@ public class TNRNUcomPosPrinterModule extends ReactContextBaseJavaModule impleme
         }
 
         Log.d(TAG, "onConnectionFinished() :: isConnected >> " + mPrinterManager.isConnected());
+        Log.d(TAG, mPrinterManager.getPrinterModel().toString());
     }
 
-    private void initPrinterManager() {
+    public void init() {
         Log.d(TAG, "init()");
         String printerAddress = "192.168.1.87";
         String printerPort = "9100";
@@ -106,6 +70,10 @@ public class TNRNUcomPosPrinterModule extends ReactContextBaseJavaModule impleme
     }
 
     @ReactMethod
+    public String getPrinterModel() {
+        return mPrinterManager.getPrinterModel().toString();
+    }
+
     public void print() {
         Log.d(TAG, "print()");
         if (!mPrinterManager.isConnected()) {
