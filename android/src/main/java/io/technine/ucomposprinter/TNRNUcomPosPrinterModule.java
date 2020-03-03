@@ -59,22 +59,13 @@ public class TNRNUcomPosPrinterModule extends ReactContextBaseJavaModule impleme
     @Override
     public void onConnectionFinished(int status) {
         Log.d(TAG, "onConnectionFinished :: status >> " + status);
-//        /*
-//         * interface function to perform action when receives result from
-//         * printer connection
-//         */
-//        if (mProgressDialog != null)
-//            mProgressDialog.dismiss();
-//
-//        // for detail of the status code, use getPrinterStatus()
-//        Utils.showMessage(mActivity, Result.getMessage(ucomManager.getPrinterStatus()));
-//
+
 //        // if error due to lacking permission to the printer, raise dialog for user
 //        if (ucomManager.getPrinterStatus() == Result.ERROR_USB_PERMISSION_NOT_GRANTED) {
 //            ucomManager.requestUsbPermission(mActivity);
 //            return;
 //        }
-//
+
 //        // the status is either Result.SUCCESS or Result.ERROR
 //        if (status == Result.SUCCESS) {
 //            mConnectionStatus.setText(R.string.connection_status_successful);
