@@ -18,7 +18,17 @@ export default class App extends Component<{}> {
     message: '--',
     text: '-- no text --'
   };
-  componentDidMount() {
+  async componentDidMount() {
+
+    // const printerModel = TNRNUcomPosPrinter.getPrinterManager().getPrinterModel();
+    // this.setState({
+    //   text: printerModel
+    // })
+    let result = await fetch('http://178.128.85.161:3181/share_background/event36_1576754413_Dnm4MS.png')
+    console.log('result1 >> ', result)
+
+    result = result.json()
+    console.log('result >> ', result)
     TNRNUcomPosPrinter.sampleMethod('Testing', 123, (message) => {
       this.setState({
         moduleVersion: '',
@@ -32,14 +42,15 @@ export default class App extends Component<{}> {
         moduleVersion: versionStr
       })
     })
-    // const printerModel = TNRNUcomPosPrinter.getPrinterManager().getPrinterModel();
-    // this.setState({
-    //   text: printerModel
-    // })
   }
   print() {
     console.log(`print()`)
-    TNRNUcomPosPrinter.print()
+    TNRNUcomPosPrinter.printLogo()
+    TNRNUcomPosPrinter.printHeader('SHub')
+    TNRNUcomPosPrinter.printContent('im testing for auto newline if it can break otherwise break it manually')
+    TNRNUcomPosPrinter.printQRCoder('http://www.google.com')
+    TNRNUcomPosPrinter.printNewLine(3)
+    TNRNUcomPosPrinter.printFooter('SHub')
   }
   render() {
     return (
