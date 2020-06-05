@@ -227,7 +227,7 @@ public class TNRNUcomPosPrinterModule extends ReactContextBaseJavaModule impleme
           tmpString.add(allString[y]);
         }
         mPrinterManager.setBoldFont(normalSize);
-        for (int x=0; x < message.size(); x++) {
+        for (int x=1; x <= message.size(); x++) {
             mPrinterManager.printText(createSpacing(4));
             mPrinterManager.printText(message.get(x));
         }
