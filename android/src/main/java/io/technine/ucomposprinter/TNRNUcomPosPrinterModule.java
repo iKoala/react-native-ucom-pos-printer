@@ -255,6 +255,7 @@ public class TNRNUcomPosPrinterModule extends ReactContextBaseJavaModule impleme
         return new String(new char[num]).replace('\0', ' ');
     }
 
+    @ReactMethod
     public void printLogo(String path) {
         if (!mPrinterManager.isConnected()) {
             Log.d(TAG, "printer not connected");
