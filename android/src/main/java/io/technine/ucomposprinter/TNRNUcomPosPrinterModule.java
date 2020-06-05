@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.io.File;
+import java.lang.Math;
 
 
 import hk.ucom.printer.UcomPrinterManager;
@@ -207,27 +208,15 @@ public class TNRNUcomPosPrinterModule extends ReactContextBaseJavaModule impleme
             Log.d(TAG, "printer not connected");
             return;
         }
-        String[] allString = mes.split(" ");
+
+        String[] allString = mes.split("(?<=\\G.{40})");
         ArrayList<String> message = new ArrayList<>();
-        int strLimit = 0;
-        ArrayList<String> tmpString = new ArrayList<>();
+
         for (int y=0; y < allString.length; y++) {
-          strLimit += allString[y].length();
-          if (strLimit > 45) {
-              String listString = "";
-              for (String s : tmpString)
-              {
-                  listString += s + " ";
-              }
-              message.add(listString);
-              strLimit = 0;
-              tmpString.clear();
-              continue;
-          }
-          tmpString.add(allString[y]);
+            message.add(allString[y]);
         }
         mPrinterManager.setBoldFont(normalSize);
-        for (int x=0; x <= message.size(); x++) {
+        for (int x=0; x < message.size(); x++) {
             mPrinterManager.printText(createSpacing(4));
             mPrinterManager.printText(message.get(x));
         }
