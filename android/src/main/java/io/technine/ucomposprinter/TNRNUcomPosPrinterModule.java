@@ -209,7 +209,7 @@ public class TNRNUcomPosPrinterModule extends ReactContextBaseJavaModule impleme
             return;
         }
 
-        String[] allString = mes.split("(?<=\\G.{30})");
+/*        String[] allString = mes.split("(?<=\\G.{20})");
         ArrayList<String> message = new ArrayList<>();
 
         for (int y=0; y < allString.length; y++) {
@@ -217,10 +217,13 @@ public class TNRNUcomPosPrinterModule extends ReactContextBaseJavaModule impleme
         }
         mPrinterManager.setBoldFont(normalSize);
         for (int x=0; x < message.size(); x++) {
-//            mPrinterManager.printText(createSpacing(4), UcomPrinterManager.Align.LEFT);
+            mPrinterManager.printText(createSpacing(4), UcomPrinterManager.Align.LEFT);
             mPrinterManager.printText(message.get(x), UcomPrinterManager.Align.CENTER);
         }
-        mPrinterManager.writeln(2);
+        mPrinterManager.writeln(2);*/
+        mPrinterManager.setBoldFont(normalSize);
+        mPrinterManager.printText(mes, UcomPrinterManager.Align.CENTER);
+        mPrinterManager.writeln(1);
     }
 
     @ReactMethod
